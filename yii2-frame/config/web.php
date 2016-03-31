@@ -5,7 +5,9 @@ $params = require(__DIR__ . '/params.php');
 $config = [
 //    'defaultRoute' => 'temp-test',
     'modules' => [
-        'demo' => 'app\module\Demo'
+//        'demo' => 'app\module\Demo',
+        'demo' => 'app\module\demo\Demo',
+        'admin'=> 'app\module\admin\Admin'
     ],
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -70,14 +72,6 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
     ],
 
     'params' => $params

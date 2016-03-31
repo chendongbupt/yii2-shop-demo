@@ -1,6 +1,6 @@
 <?php
 
-namespace app\module;
+namespace app\module\demo;
 
 /**
  * demo module definition class
@@ -10,7 +10,7 @@ class Demo extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\module\controllers';
+    public $controllerNamespace = 'app\module\demo\controllers';
 
     /**
      * @inheritdoc
