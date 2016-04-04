@@ -1,14 +1,9 @@
-<?php
 
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
 <div class="site-index">
 
     <div class="jumbotron">
         <h1>{$data}</h1>
-        <h2>{{$msg}}</h2>
+        
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
@@ -36,5 +31,7 @@ $this->title = 'My Yii Application';
 
     </div>
 </div>
+{include 'tt.tpl'}
+{include '@app/views/layouts/footer.tpl'}
 
 
