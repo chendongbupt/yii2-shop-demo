@@ -20,15 +20,15 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        'urlManager' => [
-//            'enablePrettyUrl' => true,    //启动美化
-//            'showScriptName' => true,   //禁用index.php
-//            'rules' => [
-//                "<controller:\w+>/<action:\w+>/<id:\d+>"=>"<controller>/<action>",
-//                "<controller:\w+>/<action:\w+>"=>"<controller>/<action>",
-//                'suffix' => '.html'
-//            ]
-//        ],
+       'urlManager' => [
+           'enablePrettyUrl' => true,    //启动美化
+           'showScriptName' => false,   //禁用index.php
+           'rules' => [
+               "user/<action:\w+>"=>"user/<action>",
+               "<controller:\w+>/<action:\w+>"=>"<controller>/<action>",
+               'suffix' => '.html'
+           ]
+       ],
         'view' => [
             'class' => 'yii\web\View',
             'renderers' => [
