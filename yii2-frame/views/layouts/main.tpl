@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jquery.js"></script>
-}
 </head>
 <body style="font-size: 12px">
 <header id="header">

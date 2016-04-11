@@ -13,17 +13,20 @@ use yii\web\Controller;
 use app\models\YiiUsers;
 
 class UserController extends Controller {
-    public $defaultAction = 'login';
+//    public $defaultAction = 'login';
     public $layout = '/main.tpl';
     public $enableCsrfValidation = false;   //csrf 禁用
 
     public function actionLogin(){
-        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('index.php?r=user-center', 301);
+        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
         return $this->render('login.tpl');
     }
-
+    public function actionIndex(){
+        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
+        return $this->render('login.tpl');
+    }
     public function actionReg(){
-        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('index.php?r=user-center', 301);
+        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
         return $this->render('reg.tpl');
     }
 
@@ -69,9 +72,11 @@ class UserController extends Controller {
         $pwd = $request->post('pwd', '');
         $res = ['res'=>false];
         $user = YiiUsers::findOne(['user_name'=>$username, 'pwd'=>md5($pwd)]);
-        if ( $user ){
-            $res['res'] = true;
+        if ( !$user ){
+            die(json_encode($res));
         }
+
+        $res['res'] = true;
         $session = Yii::$app->session;
         $session['user_id'] = $user->user_id;
         die(json_encode($res));

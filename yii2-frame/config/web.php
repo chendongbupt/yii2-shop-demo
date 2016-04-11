@@ -24,9 +24,11 @@ $config = [
            'enablePrettyUrl' => true,    //启动美化
            'showScriptName' => false,   //禁用index.php
            'rules' => [
-               "user/<action:\w+>"=>"user/<action>",
+                "<controller:backend/shop-manaer>/<action:detail>/<shop_id:\d+>"=>"<controller>/<action>",
+               "<controller:backend/shop-manaer>/<action:check>/<is_check:-?\d>/<shop_id:\d+>"=>"<controller>/<action>",
+               "<controller:backend/shop-manaer>/<action:auth>/<is_auth:-?\d>/<shop_id:\d+>"=>"<controller>/<action>",
                "<controller:\w+>/<action:\w+>"=>"<controller>/<action>",
-               'suffix' => '.html'
+
            ]
        ],
         'view' => [

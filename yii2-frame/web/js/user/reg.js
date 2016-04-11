@@ -1,7 +1,6 @@
 $('input').on({
     'focus' : function(){
         console.log('input');
-        $(this).addClass('form-control');
     },
     'blur' : function(){
         console.log('blur');
@@ -28,13 +27,13 @@ $('button').on('click', function(){
         return false;
     }
 
-    $.post('/index.php?r=user/ajax-reg',{'username' : inputArr.eq(0).val(), 'pwd' : inputArr.eq(1).val(), 'confirmPwd' : inputArr.eq(2).val()}, function(res){
+    $.post('/user/ajax-reg',{'username' : inputArr.eq(0).val(), 'pwd' : inputArr.eq(1).val(), 'confirmPwd' : inputArr.eq(2).val()}, function(res){
         console.log(res);
         if ( !res.res ){
             alert(res.info);
             return false;
         }
-        location.href = '/index.php?r=user-center';
+        location.href = '/user-center';
         return false;
     }, 'json');
 });

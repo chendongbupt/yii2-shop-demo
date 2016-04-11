@@ -22,14 +22,14 @@ class ShopManaerController extends \yii\web\Controller
         $adminId = $this->session['admin_id'];
 //        print_r($action->id);die();
         if ( !$adminId ){
-            return $this->redirect('index.php?r=backend/shop-manaer', 301);
+            return $this->redirect('/backend/shop-manaer', 301);
         }
         return parent::beforeAction($action);    //返回action 继续执行
     }
 
     public function actionIndex()
     {
-        if ( $this->session['admin_id'] > 0 ) return $this->render('shop.tpl');
+        if ( $this->session['admin_id'] > 0 ) return $this->redirect('/backend/shop-manaer/shop', 301);
         return $this->render('index.tpl');
     }
 
@@ -88,13 +88,14 @@ class ShopManaerController extends \yii\web\Controller
 
         if ( $username === 'admin' && $pwd === 'ttest' ){
             $this->session['admin_id'] = 1;
-            return $this->redirect('index.php?r=backend/shop-manaer/shop', 301);
+            return $this->redirect('/backend/shop-manaer/shop', 301);
         }
+        die('errrrr');
     }
 
     public function actionLogout(){
         $this->session->remove('admin_id');
-        return $this->redirect('index.php?r=backend/shop-manaer', 301);
+        return $this->redirect('/backend/shop-manaer', 301);
     }
 
 }

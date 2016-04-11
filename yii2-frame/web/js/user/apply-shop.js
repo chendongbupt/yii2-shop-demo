@@ -6,7 +6,7 @@ $('button').click(function(){
     var shop_name = $('#shop_name').val();
     var data = new FormData(document.getElementsByTagName('form')[0]);
     $.ajax({
-        url: "/index.php?r=user-center/ajax-submit-apply",
+        url: "/user-center/ajax-submit-apply",
         type: "POST",
         data: data,
         dataType: 'json',
@@ -18,8 +18,8 @@ $('button').click(function(){
                 alert(data.info);
                 return false;
             }
-            alert('申请也提交');
-            location.href = 'index.php?r=user-center';
+            alert('申请已提交');
+            location.href = '/user-center';
         }
     });
     return false;

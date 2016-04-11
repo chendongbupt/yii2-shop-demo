@@ -1,10 +1,5 @@
-<aside id="menu">
-    <a href="index.php?r=user-center">个人信息</a>
-    <a href="index.php?r=user-center/shops" class="cur">我的店铺</a>
-</aside>
-<aside>
-    <a href="index.php?r=user-center/logout">退出</a>
-</aside>
+{include "aside.tpl"}
+
 <section id="section">
     <h2>我的店铺</h2>
     <ul>
@@ -22,5 +17,5 @@
 
         {/foreach}
     </ul>
-    <a href="index.php?r=user-center/apply-shop">申请开店</a>
+    <a href="/user-center/apply-shop">申请开店</a>
 </section>

@@ -1,10 +1,5 @@
-<aside id="menu">
-    <a href="index.php?r=user-center" class="cur">个人信息</a>
-    <a href="index.php?r=user-center/shops">我的店铺</a>
-</aside>
-<aside>
-    <a href="index.php?r=user/logout">退出</a>
-</aside>
+{include "aside.tpl"}
+
 
 <section>
     <form action="" enctype="multipart/form-data" method="post">
@@ -18,4 +13,4 @@
         <button>提交申请</button>
     </form>
 </section>
-<script src="js/user/apply-shop.js"></script>
+<script src="/js/user/apply-shop.js"></script>

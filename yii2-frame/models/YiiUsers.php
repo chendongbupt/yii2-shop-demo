@@ -31,7 +31,7 @@ class YiiUsers extends \yii\db\ActiveRecord
     {
         return [
             [['user_name', 'pwd'], 'required'],
-            [['user_group'], 'integer'],
+//            [['user_group'], 'integer'],
             [['user_name'], 'string', 'max' => 16],
             [['pwd'], 'string', 'max' => 64],
             [['mobile'], 'string', 'max' => 11],

@@ -1,7 +1,6 @@
 $('input').on({
     'focus' : function(){
         console.log('input');
-        $(this).addClass('form-control');
     },
     'blur' : function(){
         console.log('blur');

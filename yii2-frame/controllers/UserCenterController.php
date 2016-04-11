@@ -6,6 +6,7 @@ use Yii;
 class UserCenterController extends \yii\web\Controller
 {
     public $layout = '/main.tpl';
+
     public $enableCsrfValidation = false;   //csrf 禁用
     private $session;
     private $userOpen = [];   //开放权限，不做验证
@@ -25,11 +26,13 @@ class UserCenterController extends \yii\web\Controller
 
         $userId = $this->session['user_id'];
         if ( !$userId ){
-            return $this->redirect('index.php?r=user', 301);
+            return $this->redirect('/user', 301);
         }
 //        print_r($action);
         return parent::beforeAction($action);    //返回action 继续执行
     }
+
+
 
     public function actionIndex()
     {
@@ -37,7 +40,7 @@ class UserCenterController extends \yii\web\Controller
 //        if ( !$userId ){
 //            return $this->redirect('index.php?r=user', 301);
 //        }
-        print_r('session user_id:'.$this->session['user_id']);
+//        print_r('session user_id:'.$this->session['user_id']);
         $query = new \yii\db\Query();
         $user = $query
             ->select(['user_id', 'user_name', 'pwd'])
@@ -84,15 +87,19 @@ class UserCenterController extends \yii\web\Controller
 
         $auth_img = $_FILES['auth_img'];
         $auth_img_other = $_FILES['auth_img_other'];
-
+//        print_r($auth_img);die();
         $checkRes = $this->checkImage($auth_img);
         if ( !$checkRes['res'] ){
             $res['info'] = $checkRes['info'];
             die(json_encode($res));
         }
+
+        if ( !file_exists('authimg') ){
+            mkdir('authimg', 0777);
+        }
         $imgType = explode('.',$auth_img['name']);
         $authFile = 'authimg/'.$this->session['user_id'].time().'check.'.$imgType[count($imgType)-1];
-        if( !copy($auth_img['tmp_name'], $authFile)){
+        if( !move_uploaded_file($auth_img['tmp_name'], $authFile)){
             $res['info'] = '图片check移动失败';
             die(json_encode($res));
         }
@@ -117,7 +124,7 @@ class UserCenterController extends \yii\web\Controller
         $shop->corporation = $corporation;
         $shop->mobile = $mobile;
         $shop->user_id = $this->session['user_id'];
-        $shop->auth_img = $authFile.','.$otherFile;
+        $shop->auth_img = '/'.$authFile.','.($otherFile? '/'.$otherFile : '');
         $shop->save();
 
         $res['res'] = true;
@@ -144,6 +151,6 @@ class UserCenterController extends \yii\web\Controller
 
     public function actionLogout(){
         $this->session->remove('user_id');
-        return $this->redirect('index.php?r=user', 301);
+        return $this->redirect('/user', 301);
     }
 }
