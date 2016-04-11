@@ -1,10 +1,10 @@
 {include "aside.tpl"}
 
-<section id="section">
-    <h2>我的店铺</h2>
+<section id="section" class="col-lg-9">
+    <h2 class="bg-info">我的店铺</h2>
     <ul>
         {foreach from=$myshops item=shop}
-            <li>
+            <li class="list-group list-group-item">
                 店铺名：{$shop.shop_name} <br/>
                 法人：{$shop.corporation} <br/>
                 电话： {$shop.mobile} <br/>
@@ -17,5 +17,5 @@
 
         {/foreach}
     </ul>
-    <a href="/user-center/apply-shop">申请开店</a>
+    <a href="/user-center/apply-shop" class="btn btn-info">申请开店</a>
 </section>
