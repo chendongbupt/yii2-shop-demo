@@ -17,10 +17,9 @@ class ShopManaerController extends \yii\web\Controller
     }
 
     public function beforeAction($action){
-        if ( in_array($action->id, $this->adminOpen) )
+        if ( in_array($action->id, $this->adminOpen) )      //开放权限的 act id 放行
             return parent::beforeAction($action);    //返回action 继续执行
         $adminId = $this->session['admin_id'];
-//        print_r($action->id);die();
         if ( !$adminId ){
             return $this->redirect('/backend/shop-manaer', 301);
         }

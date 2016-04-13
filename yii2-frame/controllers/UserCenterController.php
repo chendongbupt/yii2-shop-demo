@@ -9,26 +9,24 @@ class UserCenterController extends \yii\web\Controller
 
     public $enableCsrfValidation = false;   //csrf 禁用
     private $session;
-    private $userOpen = [];   //开放权限，不做验证
-//    const EVENT_LOGOUT = 'logout';
+    private $userOpen = [];   // act id 数组，开放权限，不做验证
+
 
     public function init ()     // 初始化
     {
         $this->session = Yii::$app->session;
         $this->userOpen = [];
-//        Event::on(UserCenterController::className(), UserCenterController::EVENT_LOGOUT, function ($event) {
-//        });
     }
 
+	// 验证是否处于登录状态
     public function beforeAction($action){
-        if ( in_array($action->id, $this->userOpen) )
+        if ( in_array($action->id, $this->userOpen) )  //开放权限的 act id 放行
             return parent::beforeAction($action);    //返回action 继续执行
 
         $userId = $this->session['user_id'];
         if ( !$userId ){
             return $this->redirect('/user', 301);
         }
-//        print_r($action);
         return parent::beforeAction($action);    //返回action 继续执行
     }
 
@@ -37,10 +35,7 @@ class UserCenterController extends \yii\web\Controller
     public function actionIndex()
     {
         $userId = $this->session['user_id'];
-//        if ( !$userId ){
-//            return $this->redirect('index.php?r=user', 301);
-//        }
-//        print_r('session user_id:'.$this->session['user_id']);
+
         $query = new \yii\db\Query();
         $user = $query
             ->select(['user_id', 'user_name', 'pwd'])
@@ -71,7 +66,7 @@ class UserCenterController extends \yii\web\Controller
         return $this->render('apply-shop.tpl');
     }
 
-    public function actionAjaxSubmitApply(){
+    public function actionAjaxSubmitApply(){         //FormData 异步传递表单
         $request = Yii::$app->request;
         $shopName = htmlspecialchars(trim($request->post('shop_name','')));
         $corporation = htmlspecialchars(trim($request->post('corporation','')));
@@ -87,7 +82,7 @@ class UserCenterController extends \yii\web\Controller
 
         $auth_img = $_FILES['auth_img'];
         $auth_img_other = $_FILES['auth_img_other'];
-//        print_r($auth_img);die();
+
         $checkRes = $this->checkImage($auth_img);
         if ( !$checkRes['res'] ){
             $res['info'] = $checkRes['info'];
@@ -149,7 +144,7 @@ class UserCenterController extends \yii\web\Controller
         return $res;
     }
 
-    public function actionLogout(){
+    public function actionLogout(){         
         $this->session->remove('user_id');
         return $this->redirect('/user', 301);
     }

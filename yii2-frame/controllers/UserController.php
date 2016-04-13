@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cd
- * Date: 16-3-31
- * Time: 下午3:27
- */
 
 namespace app\controllers;
 
@@ -13,7 +7,7 @@ use yii\web\Controller;
 use app\models\YiiUsers;
 
 class UserController extends Controller {
-//    public $defaultAction = 'login';
+    public $defaultAction = 'login';
     public $layout = '/main.tpl';
     public $enableCsrfValidation = false;   //csrf 禁用
 
@@ -21,10 +15,7 @@ class UserController extends Controller {
         if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
         return $this->render('login.tpl');
     }
-    public function actionIndex(){
-        if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
-        return $this->render('login.tpl');
-    }
+    
     public function actionReg(){
         if ( Yii::$app->session['user_id'] > 0 ) return $this->redirect('/user-center', 301);
         return $this->render('reg.tpl');
@@ -84,15 +75,8 @@ class UserController extends Controller {
 
 
     private function regSql($username, $pwd){
-//        $query = new \yii\db\Query();
         $isExist = YiiUsers::find()->where(['user_name' => $username])->exists();
-//        print_r($isExist);
-//        $isExist = $query
-//            ->select(['user_id'])
-//            ->from('yii_users')
-//            ->where(['user_name' => $username])
-//            ->exists();
-//
+
         if ( $isExist ){
             return false;
         }
@@ -103,9 +87,5 @@ class UserController extends Controller {
         $users->save();
         return true;
     }
-
-//    public function actionLogout(){
-//        $session = Yii::$app->session;
-//    }
 
 } 

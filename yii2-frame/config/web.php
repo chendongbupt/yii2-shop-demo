@@ -3,9 +3,7 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-//    'defaultRoute' => 'temp-test',
     'modules' => [
-//        'demo' => 'app\module\Demo',
         'demo' => 'app\module\demo\Demo',
         'admin'=> 'app\module\admin\Admin'
     ],
@@ -36,18 +34,7 @@ $config = [
             'renderers' => [
                 'tpl' => [
                     'class' => 'yii\smarty\ViewRenderer',
-                    //'cachePath' => '@runtime/Smarty/cache',
-                ],
-//                'twig' => [
-//                    'class' => 'yii\twig\ViewRenderer',
-//                    'cachePath' => '@runtime/Twig/cache',
-//                    // Array of twig options:
-//                    'options' => [
-//                        'auto_reload' => true,
-//                    ],
-//                    'globals' => ['html' => '\yii\helpers\Html'],
-//                    'uses' => ['yii\bootstrap'],
-//                ]
+                ]
             ]
         ],
         'user' => [
